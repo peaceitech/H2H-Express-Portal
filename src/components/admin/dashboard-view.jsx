@@ -144,7 +144,7 @@ function Trend({ value }) {
 // `caption` says which period the number covers, since only some cards follow the date filter.
 function KpiCard({ title, caption, value, detail, icon: Icon }) {
   return (
-    <Card size="sm" className="gap-1">
+    <Card size="sm" className="min-w-0 gap-1">
       <CardHeader className="flex flex-row items-start justify-between">
         <div className="grid gap-0.5">
           <CardDescription>{title}</CardDescription>
@@ -153,8 +153,8 @@ function KpiCard({ title, caption, value, detail, icon: Icon }) {
         <Icon className="size-4 text-muted-foreground" aria-hidden="true" />
       </CardHeader>
       <CardContent>
-        <p className="font-mono text-2xl font-semibold tracking-tight">{value}</p>
-        <p className="flex min-h-5 items-center gap-1 text-sm leading-5 text-muted-foreground">
+        <p className="font-mono text-lg font-semibold tracking-tight break-words sm:text-2xl">{value}</p>
+        <p className="flex min-h-5 items-center gap-1 text-xs leading-5 text-muted-foreground sm:text-sm">
           <span>{detail}</span>
         </p>
       </CardContent>
@@ -633,7 +633,7 @@ export function DashboardView() {
         </p>
       )}
 
-      <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5" aria-label="Key metrics">
+      <section className="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-5" aria-label="Key metrics">
         {dashboard
           ? dashboard.kpis.map((kpi) => <KpiCard key={kpi.title} {...kpi} />)
           : ["Packages registered", "In transit", "Ready for pickup", "Delivered"].map((title) => (

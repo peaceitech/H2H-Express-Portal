@@ -6,6 +6,7 @@ import { CalendarDays, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
 
 const noSubscribe = () => () => {};
 
@@ -36,7 +37,7 @@ export function formatRange(range) {
   return `${format(range.from, pattern)} – ${format(to, pattern)}`;
 }
 
-export function DateRangePicker({ value, onChange, today, placeholder = "This month" }) {
+export function DateRangePicker({ value, onChange, today, placeholder = "This month", className }) {
   const [open, setOpen] = useState(false);
 
   function pick(range) {
@@ -47,9 +48,9 @@ export function DateRangePicker({ value, onChange, today, placeholder = "This mo
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button variant="outline" className="w-full justify-start font-normal sm:w-auto">
+        <Button variant="outline" className={cn("w-full min-w-0 justify-start font-normal sm:w-auto", className)}>
           <CalendarDays className="text-muted-foreground" aria-hidden="true" />
-          <span>{today || value ? formatRange(value) : placeholder}</span>
+          <span className="truncate">{today || value ? formatRange(value) : placeholder}</span>
           <ChevronDown className="ml-auto text-muted-foreground" aria-hidden="true" />
         </Button>
       </PopoverTrigger>

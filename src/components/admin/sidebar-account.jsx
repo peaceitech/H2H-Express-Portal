@@ -4,6 +4,7 @@ import Link from "next/link";
 import { EllipsisVertical, LogOut, UserRound } from "lucide-react";
 import { signOut, useProfile } from "@/components/admin/profile-store";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useSidebar } from "@/components/ui/sidebar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,6 +17,8 @@ import {
 // Sign out in a menu. Collapses to just the avatar when the sidebar is icon-only.
 export function SidebarAccount() {
   const user = useProfile();
+  // On phones the sidebar is a slide-over panel; close it when going to the Profile page.
+  const { isMobile, setOpenMobile } = useSidebar();
 
   return (
     <DropdownMenu>
@@ -43,7 +46,7 @@ export function SidebarAccount() {
       </DropdownMenuTrigger>
       <DropdownMenuContent side="top" align="start" className="w-56">
         <DropdownMenuItem asChild>
-          <Link href="/admin/account">
+          <Link href="/admin/account" onClick={() => isMobile && setOpenMobile(false)}>
             <UserRound />
             Profile
           </Link>

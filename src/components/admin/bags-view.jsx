@@ -48,7 +48,7 @@ const STAT_CARDS = [
 ];
 
 const cardClass =
-  "flex flex-col gap-1 rounded-xl border bg-card p-4 text-left text-card-foreground shadow-xs transition-colors outline-none hover:bg-accent/60 focus-visible:ring-3 focus-visible:ring-ring/50 aria-pressed:border-ring aria-pressed:ring-1 aria-pressed:ring-ring";
+  "flex min-w-0 flex-col gap-1 rounded-xl border bg-card p-3 text-left text-card-foreground shadow-xs transition-colors sm:p-4 outline-none hover:bg-accent/60 focus-visible:ring-3 focus-visible:ring-ring/50 aria-pressed:border-ring aria-pressed:ring-1 aria-pressed:ring-ring";
 
 // Cancelled bags aren't listed, and bags received with problems count as Received.
 const statusOptions = [
@@ -306,7 +306,7 @@ export function BagsView() {
                 <span className={`size-2 rounded-full ${info?.dot ?? card.dot}`} aria-hidden="true" />
                 {card.label}
               </span>
-              <span className="font-mono text-2xl font-semibold tracking-tight">
+              <span className="font-mono text-lg font-semibold tracking-tight sm:text-2xl">
                 {data ? data.stats[card.key] ?? 0 : "–"}
               </span>
               <span className="mt-auto text-sm text-muted-foreground">
@@ -318,8 +318,8 @@ export function BagsView() {
       </div>
 
       <Card className="min-w-0 pb-0">
-        <CardHeader className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
-          <div className="relative w-full sm:w-auto sm:min-w-48 sm:max-w-xs sm:flex-1">
+        <CardHeader className="grid grid-cols-3 gap-2 sm:flex sm:flex-row sm:flex-wrap sm:items-center">
+          <div className="relative col-span-3 w-full sm:w-auto sm:min-w-48 sm:max-w-xs sm:flex-1">
             <Search className="pointer-events-none absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
             <Input
               type="search"
@@ -333,7 +333,7 @@ export function BagsView() {
           <Filter label="Filter by status" value={status} onChange={change(setStatus)} options={statusOptions} />
           <Filter label="Filter by origin branch" value={origin} onChange={change(setOrigin)} options={branchOptions("All origins")} />
           <Filter label="Filter by destination branch" value={destination} onChange={change(setDestination)} options={branchOptions("All destinations")} />
-          <div className="flex w-full gap-2 sm:w-auto">
+          <div className="col-span-3 flex w-full gap-2 sm:w-auto">
             <Filter label="Which date to filter by" value={dateField} onChange={change(setDateField)} options={DATE_FIELDS} className="w-32 sm:w-32" />
             <DateRangePicker value={range} onChange={change(setRange)} today={today} placeholder="All time" />
           </div>
@@ -342,7 +342,7 @@ export function BagsView() {
               Clear
             </Button>
           )}
-          <p role="status" className="text-sm text-muted-foreground sm:ml-auto">
+          <p role="status" className="col-span-3 text-sm text-muted-foreground sm:ml-auto">
             <span className="font-mono">{data?.total ?? 0}</span> {data?.total === 1 ? "box" : "boxes"}
           </p>
         </CardHeader>

@@ -15,7 +15,7 @@ export const ALL = "all";
 export function Filter({ label, value, onChange, options, className }) {
   return (
     <Select value={value} onValueChange={onChange}>
-      <SelectTrigger aria-label={label} className={cn("w-full sm:w-44", className)}>
+      <SelectTrigger aria-label={label} className={cn("w-full min-w-0 gap-1 px-2 text-xs sm:w-44 sm:gap-2 sm:px-3 sm:text-sm", className)}>
         <SelectValue />
       </SelectTrigger>
       <SelectContent>

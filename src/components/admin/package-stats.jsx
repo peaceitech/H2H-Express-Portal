@@ -82,24 +82,24 @@ function buildStats(packages, today, pickupDays) {
 }
 
 const cardClass =
-  "flex flex-col gap-1 rounded-xl border bg-card p-4 text-left text-card-foreground shadow-xs";
+  "flex min-w-0 flex-col gap-1 rounded-xl border bg-card p-3 text-left sm:p-4 text-card-foreground shadow-xs";
 
 export function PackageStats({ items, today, pickupDays, filters, onSelect }) {
   return (
-    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+    <div className="grid grid-cols-2 gap-3 lg:grid-cols-3 xl:grid-cols-6">
       {buildStats(items, today, pickupDays).map(({ label, dot, value, detail, filter }) => {
         const body = (
           <>
-            <span className="inline-flex items-center gap-2 text-sm text-muted-foreground">
+            <span className="inline-flex items-center gap-2 text-xs text-muted-foreground sm:text-sm">
               <span className={`size-2 rounded-full ${dot}`} aria-hidden="true" />
               {label}
             </span>
-            <span className="grid font-mono text-2xl font-semibold tracking-tight">
+            <span className="grid font-mono text-lg font-semibold tracking-tight break-words sm:text-2xl">
               {value.map((line) => (
                 <span key={line}>{line}</span>
               ))}
             </span>
-            <span className="mt-auto text-sm">{detail}</span>
+            <span className="mt-auto text-xs sm:text-sm">{detail}</span>
           </>
         );
 

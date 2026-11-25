@@ -218,8 +218,8 @@ export function PackagesTable({ status, initialHandling, initialSearch = "", ini
         />
       )}
       <Card className="min-w-0 pb-0">
-        <CardHeader className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
-          <div className="relative w-full sm:w-auto sm:min-w-48 sm:max-w-xs sm:flex-1">
+        <CardHeader className="grid grid-cols-3 gap-2 sm:flex sm:flex-row sm:flex-wrap sm:items-center">
+          <div className="relative col-span-3 w-full sm:w-auto sm:min-w-48 sm:max-w-xs sm:flex-1">
             <Search
               className="pointer-events-none absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground"
               aria-hidden="true"
@@ -241,7 +241,7 @@ export function PackagesTable({ status, initialHandling, initialSearch = "", ini
               options={statusOptions}
             />
           )}
-          <DateRangePicker value={dateRange} onChange={setPickedRange} today={today} />
+          <DateRangePicker value={dateRange} onChange={setPickedRange} today={today} className="col-span-2" />
           <Filter
             label="Filter by route"
             value={route}
@@ -265,7 +265,7 @@ export function PackagesTable({ status, initialHandling, initialSearch = "", ini
               Clear
             </Button>
           )}
-          <p role="status" className="text-sm text-muted-foreground sm:ml-auto">
+          <p role="status" className="col-span-3 text-sm text-muted-foreground sm:ml-auto">
             <span className="font-mono">{visible.length}</span> of{" "}
             <span className="font-mono">{available.length}</span>
           </p>

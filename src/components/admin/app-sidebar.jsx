@@ -32,6 +32,7 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
   SidebarRail,
+  useSidebar,
 } from "@/components/ui/sidebar";
 
 const badgeTones = {
@@ -41,6 +42,15 @@ const badgeTones = {
   new: "bg-brand text-black",
 };
 
+// On phones the sidebar is a slide-over panel: tapping a link should close it so the new page
+// shows. Also closes it when the link is the page already open, where nothing navigates.
+export function useCloseMobileSidebar() {
+  const { isMobile, setOpenMobile } = useSidebar();
+  return () => {
+    if (isMobile) setOpenMobile(false);
+  };
+}
+
 function isInSection(pathname, href) {
   return (
     pathname === href || (href !== "/admin" && pathname.startsWith(`${href}/`))
@@ -48,6 +58,7 @@ function isInSection(pathname, href) {
 }
 
 function NavButton({ item: { label, href, icon: Icon, badge }, pathname }) {
+  const closeMobile = useCloseMobileSidebar();
   return (
     <SidebarMenuButton
       asChild
@@ -55,7 +66,7 @@ function NavButton({ item: { label, href, icon: Icon, badge }, pathname }) {
       tooltip={label}
       className="relative h-9 data-active:before:absolute data-active:before:inset-y-1.5 data-active:before:left-0 data-active:before:w-[3px] data-active:before:rounded-full data-active:before:bg-sidebar-primary"
     >
-      <Link href={href}>
+      <Link href={href} onClick={closeMobile}>
         <Icon />
         <span>{label}</span>
         {badge && (
@@ -75,6 +86,7 @@ function CollapsibleNavItem({ item, pathname }) {
   // Follows the current page until the user opens or closes it themselves.
   const [userOpen, setUserOpen] = useState(null);
   const open = userOpen ?? isInSection(pathname, item.href);
+  const closeMobile = useCloseMobileSidebar();
 
   return (
     <Collapsible asChild open={open} onOpenChange={setUserOpen}>
@@ -97,7 +109,7 @@ function CollapsibleNavItem({ item, pathname }) {
                   isActive={pathname === child.href}
                   className="data-active:bg-sidebar-accent/50"
                 >
-                  <Link href={child.href}>
+                  <Link href={child.href} onClick={closeMobile}>
                     <span>{child.label}</span>
                   </Link>
                 </SidebarMenuSubButton>

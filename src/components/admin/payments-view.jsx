@@ -203,17 +203,17 @@ function PaymentStats({ outstanding, received }) {
   ];
 
   return (
-    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
+    <div className="grid grid-cols-2 gap-3 xl:grid-cols-4">
       {stats.map(({ label, dot, value, detail }) => (
         <div
           key={label}
-          className="flex flex-col gap-1 rounded-xl border bg-card p-4 text-card-foreground shadow-xs"
+          className="flex min-w-0 flex-col gap-1 rounded-xl border bg-card p-3 text-card-foreground shadow-xs sm:p-4"
         >
           <span className="inline-flex items-center gap-2 text-sm text-muted-foreground">
             <span className={`size-2 rounded-full ${dot}`} aria-hidden="true" />
             {label}
           </span>
-          <span className="grid font-mono text-2xl font-semibold tracking-tight">
+          <span className="grid font-mono text-lg font-semibold tracking-tight break-words sm:text-2xl">
             {value.map((line) => (
               <span key={line}>{line}</span>
             ))}
@@ -591,13 +591,13 @@ export function PaymentsView() {
       </div>
       <PaymentStats outstanding={outstanding} received={receivedInRange} />
       <Card className="min-w-0 pb-0">
-        <CardHeader className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
+        <CardHeader className="grid grid-cols-3 gap-2 sm:flex sm:flex-row sm:flex-wrap sm:items-center">
           <ToggleGroup
             type="single"
             value={tab}
             onValueChange={(value) => value && setTab(value)}
             aria-label="Payments view"
-            className="rounded-lg bg-muted p-1"
+            className="col-span-3 rounded-lg bg-muted p-1"
           >
             {Object.entries(tabs).map(([value, { label, total }]) => (
               <ToggleGroupItem
@@ -610,7 +610,7 @@ export function PaymentsView() {
               </ToggleGroupItem>
             ))}
           </ToggleGroup>
-          <div className="relative w-full sm:w-auto sm:min-w-48 sm:max-w-xs sm:flex-1">
+          <div className="relative col-span-3 w-full sm:w-auto sm:min-w-48 sm:max-w-xs sm:flex-1">
             <Search
               className="pointer-events-none absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground"
               aria-hidden="true"
@@ -677,7 +677,7 @@ export function PaymentsView() {
               Clear
             </Button>
           )}
-          <p role="status" className="text-sm text-muted-foreground sm:ml-auto">
+          <p role="status" className="col-span-3 text-sm text-muted-foreground sm:ml-auto">
             <span className="font-mono">{tabs[tab].shown}</span> of{" "}
             <span className="font-mono">{tabs[tab].total}</span>
           </p>

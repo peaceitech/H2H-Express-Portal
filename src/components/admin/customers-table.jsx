@@ -209,13 +209,13 @@ export function CustomersTable({ initialSearch = "" }) {
 
   return (
     <Card className="min-w-0 pb-0">
-      <CardHeader className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
+      <CardHeader className="grid grid-cols-3 gap-2 sm:flex sm:flex-row sm:flex-wrap sm:items-center">
         <ToggleGroup
           type="single"
           value={type}
           onValueChange={changeType}
           aria-label="Customer type"
-          className="rounded-lg bg-muted p-1"
+          className="col-span-3 rounded-lg bg-muted p-1"
         >
           {TYPES.map(({ value, label }) => (
             <ToggleGroupItem
@@ -228,7 +228,7 @@ export function CustomersTable({ initialSearch = "" }) {
             </ToggleGroupItem>
           ))}
         </ToggleGroup>
-        <div className="relative w-full sm:w-auto sm:min-w-48 sm:max-w-xs sm:flex-1">
+        <div className="relative col-span-3 w-full sm:w-auto sm:min-w-48 sm:max-w-xs sm:flex-1">
           <Search
             className="pointer-events-none absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground"
             aria-hidden="true"
@@ -269,7 +269,7 @@ export function CustomersTable({ initialSearch = "" }) {
             Clear
           </Button>
         )}
-        <p role="status" className="text-sm text-muted-foreground sm:ml-auto">
+        <p role="status" className="col-span-3 text-sm text-muted-foreground sm:ml-auto">
           <span className="font-mono">{visible.length}</span> of{" "}
           <span className="font-mono">{people.length}</span>
         </p>

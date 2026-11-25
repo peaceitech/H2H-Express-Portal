@@ -474,7 +474,7 @@ export function StaffView() {
       <div
         role="group"
         aria-label="Filter by role"
-        className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4"
+        className="grid grid-cols-2 gap-3 xl:grid-cols-4"
       >
         {ROLES.map(({ value, label, description }) => {
           const active = role === value;
@@ -484,9 +484,9 @@ export function StaffView() {
               type="button"
               aria-pressed={active}
               onClick={() => setRole(active ? ALL : value)}
-              className="flex flex-col gap-1 rounded-xl border bg-card p-4 text-left text-sm text-card-foreground shadow-xs transition-colors outline-none hover:bg-accent/60 focus-visible:ring-3 focus-visible:ring-ring/50 aria-pressed:border-ring aria-pressed:ring-1 aria-pressed:ring-ring"
+              className="flex min-w-0 flex-col gap-1 rounded-xl border bg-card p-3 text-left text-xs text-card-foreground sm:p-4 sm:text-sm shadow-xs transition-colors outline-none hover:bg-accent/60 focus-visible:ring-3 focus-visible:ring-ring/50 aria-pressed:border-ring aria-pressed:ring-1 aria-pressed:ring-ring"
             >
-              <span className="flex items-baseline justify-between gap-2">
+              <span className="flex flex-wrap items-baseline justify-between gap-x-2">
                 <span className="font-medium">{label}</span>
                 <span className="text-xs text-muted-foreground">
                   <span className="font-mono">
@@ -502,13 +502,13 @@ export function StaffView() {
       </div>
 
       <Card className="min-w-0 pb-0">
-        <CardHeader className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
+        <CardHeader className="grid grid-cols-3 gap-2 sm:flex sm:flex-row sm:flex-wrap sm:items-center">
           <ToggleGroup
             type="single"
             value={status}
             onValueChange={(value) => value && setStatus(value)}
             aria-label="Staff status"
-            className="rounded-lg bg-muted p-1"
+            className="col-span-3 rounded-lg bg-muted p-1"
           >
             {STATUS_TABS.map(({ value, label }) => (
               <ToggleGroupItem
@@ -521,7 +521,7 @@ export function StaffView() {
               </ToggleGroupItem>
             ))}
           </ToggleGroup>
-          <div className="relative w-full sm:w-auto sm:min-w-48 sm:max-w-xs sm:flex-1">
+          <div className="relative col-span-3 w-full sm:w-auto sm:min-w-48 sm:max-w-xs sm:flex-1">
             <Search
               className="pointer-events-none absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground"
               aria-hidden="true"
@@ -548,7 +548,7 @@ export function StaffView() {
               Clear
             </Button>
           )}
-          <p role="status" className="text-sm text-muted-foreground sm:ml-auto">
+          <p role="status" className="col-span-3 text-sm text-muted-foreground sm:ml-auto">
             <span className="font-mono">{visible.length}</span> of{" "}
             <span className="font-mono">{staff.length}</span>
           </p>
